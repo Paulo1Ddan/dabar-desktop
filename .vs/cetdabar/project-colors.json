@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "31c6caa3-832d-41d9-80a6-f8eddc74275c": {
+      "ProjectGuid": "31c6caa3-832d-41d9-80a6-f8eddc74275c",
+      "DisplayName": "cetdabar",
+      "ColorIndex": 0
+    },
+    "47479dce-8d4e-48e3-a414-0e7e9fbe8c42": {
+      "ProjectGuid": "47479dce-8d4e-48e3-a414-0e7e9fbe8c42",
+      "DisplayName": "Solution Items",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
