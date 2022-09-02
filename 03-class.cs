@@ -27,13 +27,17 @@ namespace cetdabar
         private void frmClass_Load(object sender, EventArgs e)
         {
             pnlClass.Location = new Point(this.Width/2 - pnlClass.Width/2, this.Height/2 - pnlClass.Height/2);
-            LoadData();
+            ListAll();
         }
 
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            var result = MessageBox.Show("Deseja realmente excluir esse registro?", "ATENÇÃO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes && Variables.selectedRow >= 0)
+            {
+                Delete();
+            }
         }
 
         private void btnReg_Click(object sender, EventArgs e)
@@ -49,7 +53,6 @@ namespace cetdabar
             {
                 Variables.idClass = Convert.ToInt32(dgvClass[0, Variables.selectedRow].Value);
             }
-            MessageBox.Show(Variables.idClass.ToString());
         }
 
         private void dgvClass_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -59,7 +62,8 @@ namespace cetdabar
         }
 
         //DB Methods
-        private void LoadData()
+        //ListAll
+        private void ListAll()
         {
             try
             {
@@ -75,18 +79,37 @@ namespace cetdabar
                 dgvClass.Columns[1].Width = 205;
                 dgvClass.Columns[2].Width = 206;
                 dgvClass.Columns[3].Width = 206;
+                dgvClass.Columns[4].Width = 206;
 
                 string value;
+                string valueAndamento;
                 for(int i = 0; i < dgvClass.Rows.Count; i++)
                 {
+
                     value = dgvClass.Rows[i].Cells[2].Value.ToString();
-                    if (value == "1")
+                    valueAndamento = dgvClass.Rows[i].Cells[3].Value.ToString();
+
+                    switch (value)
                     {
-                        Convert.ToString(dgvClass.Rows[i].Cells[2].Value = "Ativa");
+                        case "1":
+                            dgvClass.Rows[i].Cells[2].Value = "Ativo";
+                        break;
+                        case "0":
+                            dgvClass.Rows[i].Cells[2].Value = "Inativo";
+                        break;
                     }
-                    else
+
+                    switch (valueAndamento)
                     {
-                        Convert.ToString(dgvClass.Rows[i].Cells[2].Value = "Inativa");
+                        case "0":
+                            dgvClass.Rows[i].Cells[3].Value = "Incompleta";
+                            break;
+                        case "1":
+                            dgvClass.Rows[i].Cells[3].Value = "Completa";
+                            break;                        
+                        case "2":
+                            dgvClass.Rows[i].Cells[3].Value = "Finalizada";
+                            break;
                     }
                 }
                 dgvClass.ClearSelection();
@@ -98,5 +121,32 @@ namespace cetdabar
 
         }
 
+        //Delete
+        private void Delete()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "DELETE FROM turma WHERE idTurma = @id";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                cmd.Parameters.AddWithValue("@id", Variables.idClass);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                MessageBox.Show("Turma excluida com sucesso");
+
+                dgvClass.DataSource = dt;
+                dgvClass.ClearSelection();
+
+                Database.CloseConn();
+                ListAll();
+
+            }catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao deletar turma \n\n Descrição - " + ex.Message);
+            }
+
+        }
     }
 }

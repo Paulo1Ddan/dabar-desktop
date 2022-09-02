@@ -35,13 +35,13 @@
             this.chkInactive = new System.Windows.Forms.CheckBox();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.dgvCursos = new System.Windows.Forms.DataGridView();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.lblCursos = new System.Windows.Forms.Label();
             this.btnAll = new cetdabar.CustomButton();
             this.btnDelete = new cetdabar.CustomButton();
             this.btnUpdate = new cetdabar.CustomButton();
             this.btnReg = new cetdabar.CustomButton();
-            this.dgvCursos = new System.Windows.Forms.DataGridView();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.lblCursos = new System.Windows.Forms.Label();
             this.pnlCursos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).BeginInit();
             this.SuspendLayout();
@@ -104,67 +104,6 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(647, 26);
             this.txtSearch.TabIndex = 19;
-            // 
-            // btnAll
-            // 
-            this.btnAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
-            this.btnAll.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAll.FlatAppearance.BorderSize = 0;
-            this.btnAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAll.ForeColor = System.Drawing.Color.White;
-            this.btnAll.Location = new System.Drawing.Point(856, 437);
-            this.btnAll.Name = "btnAll";
-            this.btnAll.Size = new System.Drawing.Size(220, 50);
-            this.btnAll.TabIndex = 16;
-            this.btnAll.Text = "Todos";
-            this.btnAll.UseVisualStyleBackColor = false;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
-            this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(856, 356);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(220, 50);
-            this.btnDelete.TabIndex = 15;
-            this.btnDelete.Text = "Excluir";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
-            this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUpdate.FlatAppearance.BorderSize = 0;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(856, 275);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(220, 50);
-            this.btnUpdate.TabIndex = 14;
-            this.btnUpdate.Text = "Editar";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            // 
-            // btnReg
-            // 
-            this.btnReg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
-            this.btnReg.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReg.FlatAppearance.BorderSize = 0;
-            this.btnReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReg.ForeColor = System.Drawing.Color.White;
-            this.btnReg.Location = new System.Drawing.Point(856, 194);
-            this.btnReg.Name = "btnReg";
-            this.btnReg.Size = new System.Drawing.Size(220, 50);
-            this.btnReg.TabIndex = 13;
-            this.btnReg.Text = "Cadastrar";
-            this.btnReg.UseVisualStyleBackColor = false;
-            this.btnReg.Click += new System.EventHandler(this.btnReg_Click);
             // 
             // dgvCursos
             // 
@@ -231,6 +170,68 @@
             this.lblCursos.TabIndex = 11;
             this.lblCursos.Text = "Cursos";
             this.lblCursos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnAll
+            // 
+            this.btnAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            this.btnAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAll.FlatAppearance.BorderSize = 0;
+            this.btnAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAll.ForeColor = System.Drawing.Color.White;
+            this.btnAll.Location = new System.Drawing.Point(856, 437);
+            this.btnAll.Name = "btnAll";
+            this.btnAll.Size = new System.Drawing.Size(220, 50);
+            this.btnAll.TabIndex = 16;
+            this.btnAll.Text = "Todos";
+            this.btnAll.UseVisualStyleBackColor = false;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
+            this.btnDelete.Location = new System.Drawing.Point(856, 356);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(220, 50);
+            this.btnDelete.TabIndex = 15;
+            this.btnDelete.Text = "Excluir";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdate.FlatAppearance.BorderSize = 0;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
+            this.btnUpdate.Location = new System.Drawing.Point(856, 275);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(220, 50);
+            this.btnUpdate.TabIndex = 14;
+            this.btnUpdate.Text = "Editar";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            // 
+            // btnReg
+            // 
+            this.btnReg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            this.btnReg.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReg.FlatAppearance.BorderSize = 0;
+            this.btnReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReg.ForeColor = System.Drawing.Color.White;
+            this.btnReg.Location = new System.Drawing.Point(856, 194);
+            this.btnReg.Name = "btnReg";
+            this.btnReg.Size = new System.Drawing.Size(220, 50);
+            this.btnReg.TabIndex = 13;
+            this.btnReg.Text = "Cadastrar";
+            this.btnReg.UseVisualStyleBackColor = false;
+            this.btnReg.Click += new System.EventHandler(this.btnReg_Click);
             // 
             // frmCursos
             // 

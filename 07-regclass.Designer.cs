@@ -63,7 +63,7 @@
             this.pnlClass.Controls.Add(this.txtName);
             this.pnlClass.Controls.Add(this.btnClose);
             this.pnlClass.Controls.Add(this.lblClass);
-            this.pnlClass.Location = new System.Drawing.Point(269, 49);
+            this.pnlClass.Location = new System.Drawing.Point(262, 70);
             this.pnlClass.Name = "pnlClass";
             this.pnlClass.Size = new System.Drawing.Size(800, 500);
             this.pnlClass.TabIndex = 3;

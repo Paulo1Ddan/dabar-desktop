@@ -21,7 +21,7 @@ namespace cetdabar
         private void frmUsers_Load(object sender, EventArgs e)
         {
             pnlUsers.Location = new Point(this.Width/2 - pnlUsers.Width/2, this.Height/2 - pnlUsers.Height/2);
-            LoadData();
+            ListAll();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -37,7 +37,8 @@ namespace cetdabar
         }
 
         //DB Methods
-        private void LoadData()
+        //ListAll
+        private void ListAll()
         {
             try
             {
@@ -49,6 +50,37 @@ namespace cetdabar
                 adapter.Fill(dt);
 
                 dgvUsers.DataSource = dt;
+
+                string valueCat;
+                string valueStatus;
+                for(int i = 0; i < dgvUsers.Rows.Count; i++)
+                {
+                    valueStatus = dgvUsers.Rows[i].Cells[7].Value.ToString();
+                    if(valueStatus == "1")
+                    {
+                        dgvUsers.Rows[i].Cells[7].Value = "Ativo";
+                    }
+                    else
+                    {
+                        dgvUsers.Rows[i].Cells[7].Value = "Inativo";
+                    }
+
+                    valueCat = dgvUsers.Rows[i].Cells[8].Value.ToString();
+                    switch (valueCat)
+                    {
+                        case "0":
+                            dgvUsers.Rows[i].Cells[8].Value = "ADM";
+                            break;
+                        case "1":
+                            dgvUsers.Rows[i].Cells[8].Value = "Aluno";
+                            break;
+                        case "2":
+                            dgvUsers.Rows[i].Cells[8].Value = "Professor";
+                            break;
+                    }
+
+                }
+                
                 dgvUsers.ClearSelection();
                 Database.CloseConn();
             }

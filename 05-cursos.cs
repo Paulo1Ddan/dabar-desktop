@@ -21,7 +21,7 @@ namespace cetdabar
         private void frmCursos_Load(object sender, EventArgs e)
         {
             pnlCursos.Location = new Point(this.Width / 2 - pnlCursos.Width / 2, this.Height / 2 - pnlCursos.Height / 2);
-            LoadData();
+            ListAll();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -36,9 +36,13 @@ namespace cetdabar
             Hide();
         }
 
-
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            
+        }
         //DB Methods
-        private void LoadData()
+        //LoadData
+        private void ListAll()
         {
             try
             {
@@ -51,10 +55,26 @@ namespace cetdabar
 
                 dgvCursos.DataSource = dt;
 
-                string Value = dgvCursos.Rows[0].Cells[2].Value.ToString();
-                dgvCursos.Rows[0].Cells[2].Value = Value.Substring(0,100);
+                string Value;
+                string valueStatus;
+                for(int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Value = dgvCursos.Rows[i].Cells[2].Value.ToString();
+                    dgvCursos.Rows[i].Cells[2].Value = Value.Substring(0, 100);
+
+                    valueStatus = dgvCursos.Rows[i].Cells[7].Value.ToString();
+                    if(valueStatus == "1")
+                    {
+                        dgvCursos.Rows[i].Cells[7].Value = "Ativo";
+                    }
+                    else
+                    {
+                        dgvCursos.Rows[i].Cells[7].Value = "Inativo";
+                    }
+                }
                 dgvCursos.ClearSelection();
                 Database.CloseConn();
+
             }
             catch (Exception ex)
             {
@@ -62,5 +82,6 @@ namespace cetdabar
             }
 
         }
+
     }
 }
