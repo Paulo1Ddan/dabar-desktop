@@ -13,8 +13,8 @@ namespace cetdabar
         public static string function;
 
         //Class
-        public static int idClass, statusClass, andamentoClass;
-        public static string nameClass;
+        public static int idClass;
+        public static string nameClass, statusClass, andamentoClass;
         public static DateTime dateRegClass;
     }
 }

@@ -122,7 +122,7 @@
             this.btnReg.Name = "btnReg";
             this.btnReg.Size = new System.Drawing.Size(150, 40);
             this.btnReg.TabIndex = 4;
-            this.btnReg.Text = "Cadastrar";
+            this.btnReg.Text = "Salvar";
             this.btnReg.UseVisualStyleBackColor = false;
             this.btnReg.Click += new System.EventHandler(this.btnReg_Click);
             // 

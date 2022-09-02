@@ -78,9 +78,7 @@ namespace cetdabar
                             dgvUsers.Rows[i].Cells[8].Value = "Professor";
                             break;
                     }
-
                 }
-                
                 dgvUsers.ClearSelection();
                 Database.CloseConn();
             }
@@ -88,7 +86,6 @@ namespace cetdabar
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
     }
 }
