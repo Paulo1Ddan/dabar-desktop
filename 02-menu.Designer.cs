@@ -28,11 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.btnRegLog = new cetdabar.CustomButton();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
             this.dgvReg = new System.Windows.Forms.DataGridView();
+            this.btnRegNeg = new cetdabar.CustomButton();
+            this.btnRegWait = new cetdabar.CustomButton();
+            this.btnRegApr = new cetdabar.CustomButton();
+            this.btnRegDel = new cetdabar.CustomButton();
+            this.btnRegUpd = new cetdabar.CustomButton();
+            this.btnRegCad = new cetdabar.CustomButton();
             this.picClass = new System.Windows.Forms.PictureBox();
             this.picBlog = new System.Windows.Forms.PictureBox();
             this.picUser = new System.Windows.Forms.PictureBox();
@@ -40,13 +49,7 @@
             this.picCursos = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnRegLog = new cetdabar.CustomButton();
-            this.btnRegNeg = new cetdabar.CustomButton();
-            this.btnRegWait = new cetdabar.CustomButton();
-            this.btnRegApr = new cetdabar.CustomButton();
-            this.btnRegDel = new cetdabar.CustomButton();
-            this.btnRegUpd = new cetdabar.CustomButton();
-            this.btnRegCad = new cetdabar.CustomButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClass)).BeginInit();
@@ -83,6 +86,21 @@
             this.pnlMenu.Size = new System.Drawing.Size(1100, 600);
             this.pnlMenu.TabIndex = 1;
             // 
+            // btnRegLog
+            // 
+            this.btnRegLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            this.btnRegLog.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRegLog.FlatAppearance.BorderSize = 0;
+            this.btnRegLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegLog.ForeColor = System.Drawing.Color.White;
+            this.btnRegLog.Location = new System.Drawing.Point(941, 310);
+            this.btnRegLog.Name = "btnRegLog";
+            this.btnRegLog.Size = new System.Drawing.Size(150, 40);
+            this.btnRegLog.TabIndex = 33;
+            this.btnRegLog.Text = "Relatório";
+            this.btnRegLog.UseVisualStyleBackColor = false;
+            // 
             // lblTime
             // 
             this.lblTime.AutoSize = true;
@@ -112,6 +130,7 @@
             this.lblUser.Size = new System.Drawing.Size(110, 20);
             this.lblUser.TabIndex = 30;
             this.lblUser.Text = "Paulo Daniel";
+            this.lblUser.Click += new System.EventHandler(this.lblUser_Click);
             // 
             // dgvReg
             // 
@@ -121,106 +140,6 @@
             this.dgvReg.Name = "dgvReg";
             this.dgvReg.Size = new System.Drawing.Size(516, 303);
             this.dgvReg.TabIndex = 29;
-            // 
-            // picClass
-            // 
-            this.picClass.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picClass.Image = global::cetdabar.Properties.Resources.img_class;
-            this.picClass.Location = new System.Drawing.Point(213, 48);
-            this.picClass.Name = "picClass";
-            this.picClass.Size = new System.Drawing.Size(200, 200);
-            this.picClass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picClass.TabIndex = 21;
-            this.picClass.TabStop = false;
-            this.picClass.Click += new System.EventHandler(this.picClass_Click);
-            // 
-            // picBlog
-            // 
-            this.picBlog.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picBlog.Image = global::cetdabar.Properties.Resources.img_blog;
-            this.picBlog.Location = new System.Drawing.Point(871, 357);
-            this.picBlog.Name = "picBlog";
-            this.picBlog.Size = new System.Drawing.Size(220, 220);
-            this.picBlog.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBlog.TabIndex = 20;
-            this.picBlog.TabStop = false;
-            this.picBlog.Click += new System.EventHandler(this.picBlog_Click);
-            // 
-            // picUser
-            // 
-            this.picUser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picUser.Image = global::cetdabar.Properties.Resources.img_users;
-            this.picUser.Location = new System.Drawing.Point(645, 357);
-            this.picUser.Name = "picUser";
-            this.picUser.Size = new System.Drawing.Size(220, 220);
-            this.picUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picUser.TabIndex = 19;
-            this.picUser.TabStop = false;
-            this.picUser.Click += new System.EventHandler(this.picUser_Click);
-            // 
-            // picEmail
-            // 
-            this.picEmail.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picEmail.Image = global::cetdabar.Properties.Resources.img_email;
-            this.picEmail.Location = new System.Drawing.Point(419, 357);
-            this.picEmail.Name = "picEmail";
-            this.picEmail.Size = new System.Drawing.Size(220, 220);
-            this.picEmail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picEmail.TabIndex = 18;
-            this.picEmail.TabStop = false;
-            // 
-            // picCursos
-            // 
-            this.picCursos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picCursos.Image = global::cetdabar.Properties.Resources.img_cursos;
-            this.picCursos.Location = new System.Drawing.Point(7, 48);
-            this.picCursos.Name = "picCursos";
-            this.picCursos.Size = new System.Drawing.Size(200, 200);
-            this.picCursos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picCursos.TabIndex = 15;
-            this.picCursos.TabStop = false;
-            this.picCursos.Click += new System.EventHandler(this.picCursos_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::cetdabar.Properties.Resources.img_company;
-            this.pictureBox1.Location = new System.Drawing.Point(7, 254);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(406, 323);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 11;
-            this.pictureBox1.TabStop = false;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(23)))), ((int)(((byte)(68)))));
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(1060, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(40, 40);
-            this.btnClose.TabIndex = 10;
-            this.btnClose.Text = "X";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnRegLog
-            // 
-            this.btnRegLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
-            this.btnRegLog.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRegLog.FlatAppearance.BorderSize = 0;
-            this.btnRegLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegLog.ForeColor = System.Drawing.Color.White;
-            this.btnRegLog.Location = new System.Drawing.Point(941, 310);
-            this.btnRegLog.Name = "btnRegLog";
-            this.btnRegLog.Size = new System.Drawing.Size(150, 40);
-            this.btnRegLog.TabIndex = 33;
-            this.btnRegLog.Text = "Relatório";
-            this.btnRegLog.UseVisualStyleBackColor = false;
             // 
             // btnRegNeg
             // 
@@ -312,6 +231,95 @@
             this.btnRegCad.Text = "Cadastrar";
             this.btnRegCad.UseVisualStyleBackColor = false;
             // 
+            // picClass
+            // 
+            this.picClass.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picClass.Image = global::cetdabar.Properties.Resources.img_class;
+            this.picClass.Location = new System.Drawing.Point(213, 48);
+            this.picClass.Name = "picClass";
+            this.picClass.Size = new System.Drawing.Size(200, 200);
+            this.picClass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picClass.TabIndex = 21;
+            this.picClass.TabStop = false;
+            this.picClass.Click += new System.EventHandler(this.picClass_Click);
+            // 
+            // picBlog
+            // 
+            this.picBlog.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picBlog.Image = global::cetdabar.Properties.Resources.img_blog;
+            this.picBlog.Location = new System.Drawing.Point(871, 357);
+            this.picBlog.Name = "picBlog";
+            this.picBlog.Size = new System.Drawing.Size(220, 220);
+            this.picBlog.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBlog.TabIndex = 20;
+            this.picBlog.TabStop = false;
+            this.picBlog.Click += new System.EventHandler(this.picBlog_Click);
+            // 
+            // picUser
+            // 
+            this.picUser.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picUser.Image = global::cetdabar.Properties.Resources.img_users;
+            this.picUser.Location = new System.Drawing.Point(645, 357);
+            this.picUser.Name = "picUser";
+            this.picUser.Size = new System.Drawing.Size(220, 220);
+            this.picUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picUser.TabIndex = 19;
+            this.picUser.TabStop = false;
+            this.picUser.Click += new System.EventHandler(this.picUser_Click);
+            // 
+            // picEmail
+            // 
+            this.picEmail.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picEmail.Image = global::cetdabar.Properties.Resources.img_email;
+            this.picEmail.Location = new System.Drawing.Point(419, 357);
+            this.picEmail.Name = "picEmail";
+            this.picEmail.Size = new System.Drawing.Size(220, 220);
+            this.picEmail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picEmail.TabIndex = 18;
+            this.picEmail.TabStop = false;
+            // 
+            // picCursos
+            // 
+            this.picCursos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picCursos.Image = global::cetdabar.Properties.Resources.img_cursos;
+            this.picCursos.Location = new System.Drawing.Point(7, 48);
+            this.picCursos.Name = "picCursos";
+            this.picCursos.Size = new System.Drawing.Size(200, 200);
+            this.picCursos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picCursos.TabIndex = 15;
+            this.picCursos.TabStop = false;
+            this.picCursos.Click += new System.EventHandler(this.picCursos_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::cetdabar.Properties.Resources.img_company;
+            this.pictureBox1.Location = new System.Drawing.Point(7, 254);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(406, 323);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(23)))), ((int)(((byte)(68)))));
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(1060, 0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(40, 40);
+            this.btnClose.TabIndex = 10;
+            this.btnClose.Text = "X";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -322,6 +330,7 @@
             this.Controls.Add(this.pnlMenu);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
@@ -361,5 +370,6 @@
         private CustomButton btnRegUpd;
         private CustomButton btnRegCad;
         private CustomButton btnRegLog;
+        private System.Windows.Forms.Timer timer1;
     }
 }

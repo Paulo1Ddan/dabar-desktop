@@ -36,6 +36,109 @@ namespace cetdabar
             Hide();
         }
 
+        //Filter
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSearch.Text.Length > 0)
+            {
+                Variables.nameUser = txtSearch.Text;
+                if (chkActive.Checked)
+                {
+                    chkInactive.Checked = false;
+                    chkInactive.Enabled = false;
+                    ListActiveName();
+                }
+                else if (chkInactive.Checked)
+                {
+                    chkActive.Checked = false;
+                    chkActive.Enabled = false;
+                    ListInactiveName();
+                }
+                else
+                {
+                    ListAllName();
+                }
+            }
+            else
+            {
+                if (chkActive.Checked)
+                {
+                    chkInactive.Checked = false;
+                    chkInactive.Enabled = false;
+                    ListActive();
+                }
+                else if (chkInactive.Checked)
+                {
+                    chkActive.Checked = false;
+                    chkActive.Enabled = false;
+                    ListInactive();
+                }
+                else
+                {
+                    ListAll();
+                }
+            }
+        }
+        private void chkActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkActive.Checked)
+            {
+                chkInactive.Checked = false;
+                chkInactive.Enabled = false;
+                if (txtSearch.Text.Length > 0)
+                {
+
+                    ListActiveName();
+                }
+                else
+                {
+                    ListActive();
+                }
+            }
+            else
+            {
+                chkInactive.Enabled = true;
+                if(txtSearch.Text.Length > 0)
+                {
+                    ListAllName();
+                }
+                else
+                {
+                    ListAll();
+                }
+            }
+        }
+
+        private void chkInactive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkInactive.Checked)
+            {
+                chkActive.Checked = false;
+                chkActive.Enabled = false;
+                if (txtSearch.Text.Length > 0)
+                {
+
+                    ListInactiveName();
+                }
+                else
+                {
+                    ListInactive();
+                }
+            }
+            else
+            {
+                chkActive.Enabled = true;
+                if (txtSearch.Text.Length > 0)
+                {
+                    ListAllName();
+                }
+                else
+                {
+                    ListAll();
+                }
+            }
+        }
+
         //DB Methods
         //ListAll
         private void ListAll()
@@ -50,35 +153,6 @@ namespace cetdabar
                 adapter.Fill(dt);
 
                 dgvUsers.DataSource = dt;
-
-                string valueCat;
-                string valueStatus;
-                for(int i = 0; i < dgvUsers.Rows.Count; i++)
-                {
-                    valueStatus = dgvUsers.Rows[i].Cells[7].Value.ToString();
-                    if(valueStatus == "1")
-                    {
-                        dgvUsers.Rows[i].Cells[7].Value = "Ativo";
-                    }
-                    else
-                    {
-                        dgvUsers.Rows[i].Cells[7].Value = "Inativo";
-                    }
-
-                    valueCat = dgvUsers.Rows[i].Cells[8].Value.ToString();
-                    switch (valueCat)
-                    {
-                        case "0":
-                            dgvUsers.Rows[i].Cells[8].Value = "ADM";
-                            break;
-                        case "1":
-                            dgvUsers.Rows[i].Cells[8].Value = "Aluno";
-                            break;
-                        case "2":
-                            dgvUsers.Rows[i].Cells[8].Value = "Professor";
-                            break;
-                    }
-                }
                 dgvUsers.ClearSelection();
                 Database.CloseConn();
             }
@@ -87,5 +161,151 @@ namespace cetdabar
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //Delete
+        private void Delete()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "DELETE FROM usuario WHERE idUsuario = @id";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                cmd.Parameters.AddWithValue("@id", Variables.idClass);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                MessageBox.Show("Usuario excluido com sucesso");
+
+                dgvUsers.DataSource = dt;
+                dgvUsers.ClearSelection();
+
+                Database.CloseConn();
+                ListAll();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao deletar turma \n\n Descrição - " + ex.Message);
+            }
+        }
+
+        //ListAllName
+        private void ListAllName()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "SELECT * FROM usuariocompleto WHERE `NOME DO USUARIO` LIKE '%" + Variables.nameUser + "%' OR `EMAIL DO USUARIO` LIKE '%" + Variables.nameUser + "%'";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                dgvUsers.DataSource = dt;
+
+                dgvUsers.ClearSelection();
+                Database.CloseConn();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //ListActive
+        private void ListActive()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "SELECT * FROM usuarioativo";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                dgvUsers.DataSource = dt;
+
+                dgvUsers.ClearSelection();
+                Database.CloseConn();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        //ListActiveName
+        private void ListActiveName()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "SELECT * FROM usuarioativo WHERE `NOME DO USUARIO` LIKE '%" + Variables.nameUser + "%' OR `EMAIL DO USUARIO` LIKE '%" + Variables.nameUser + "%'";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                dgvUsers.DataSource = dt;
+
+                dgvUsers.ClearSelection();
+                Database.CloseConn();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        //ListInactive
+        private void ListInactive()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "SELECT * FROM usuarioinativo";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                dgvUsers.DataSource = dt;
+
+                dgvUsers.ClearSelection();
+                Database.CloseConn();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        //ListInactiveName
+        private void ListInactiveName()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "SELECT * FROM usuarioinativo WHERE `NOME DO USUARIO` LIKE '%" + Variables.nameUser + "%' OR `EMAIL DO USUARIO` LIKE '%" + Variables.nameUser + "%'";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                dgvUsers.DataSource = dt;
+
+                dgvUsers.ClearSelection();
+                Database.CloseConn();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            } 
+        }
+
     }
 }

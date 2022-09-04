@@ -55,23 +55,6 @@ namespace cetdabar
 
                 dgvCursos.DataSource = dt;
 
-                string Value;
-                string valueStatus;
-                for(int i = 0; i < dt.Rows.Count; i++)
-                {
-                    Value = dgvCursos.Rows[i].Cells[2].Value.ToString();
-                    dgvCursos.Rows[i].Cells[2].Value = Value.Substring(0, 100);
-
-                    valueStatus = dgvCursos.Rows[i].Cells[7].Value.ToString();
-                    if(valueStatus == "1")
-                    {
-                        dgvCursos.Rows[i].Cells[7].Value = "Ativo";
-                    }
-                    else
-                    {
-                        dgvCursos.Rows[i].Cells[7].Value = "Inativo";
-                    }
-                }
                 dgvCursos.ClearSelection();
                 Database.CloseConn();
 

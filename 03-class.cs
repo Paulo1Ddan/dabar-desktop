@@ -73,37 +73,43 @@ namespace cetdabar
         //Filter
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if(txtSearch.Text.Length == 0)
-            {
-                ListAll();
-            }else if(txtSearch.Text.Length >= 1)
-            {
+            if(txtSearch.Text.Length > 0){
                 Variables.nameClass = txtSearch.Text;
-                ListAllName();
+                if (chkActive.Checked)
+                {
+                    chkInactived.Checked = false;
+                    chkInactived.Enabled = false;
+                    ListActiveNameClass();
+                }
+                else if (chkInactived.Checked)
+                {
+                    chkActive.Checked = false;
+                    chkActive.Enabled = false;
+                    ListInactiveNameClass();
+                }
+                else
+                {
+                    ListAllName();
+                }
             }
-            else if (chkInactived.Checked && txtSearch.Text.Length > 0)
+            else
             {
-                chkActive.Checked = false;
-                chkActive.Enabled = false;
-                ListInactiveNameClass();
-            }
-            else if(chkInactived.Checked && txtSearch.Text.Length == 0)
-            {
-                chkActive.Checked = false;
-                chkActive.Enabled = false;
-                ListInactiveClass();
-            }
-            else if (chkActive.Checked && txtSearch.Text.Length > 0)
-            {
-                chkInactived.Checked = false;
-                chkInactived.Enabled = false;
-                ListActiveNameClass();
-            }
-            else if (chkActive.Checked && txtSearch.Text.Length == 0)
-            {
-                chkInactived.Checked = false;
-                chkInactived.Enabled = false;
-                ListActiveClass();
+                if (chkActive.Checked)
+                {
+                    chkInactived.Checked = false;
+                    chkInactived.Enabled = false;
+                    ListActiveClass();
+                }
+                else if (chkInactived.Checked)
+                {
+                    chkActive.Checked = false;
+                    chkActive.Enabled = false;
+                    ListInactiveClass();
+                }
+                else
+                {
+                    ListAll();
+                }
             }
         }
         private void chkActive_CheckedChanged(object sender, EventArgs e)
@@ -112,11 +118,27 @@ namespace cetdabar
             {
                 chkInactived.Checked = false;
                 chkInactived.Enabled = false;
-                ListActiveClass();
-            }else if(chkActive.Checked == false)
+                if(txtSearch.Text.Length > 0)
+                {
+                    ListActiveNameClass();
+                }
+                else
+                {
+                    ListActiveClass();
+                }
+            }
+            else
             {
                 chkInactived.Enabled = true;
-                ListAll();
+                if (txtSearch.Text.Length > 0)
+                {
+                    Variables.nameClass = txtSearch.Text;
+                    ListAllName();
+                }
+                else
+                {
+                    ListAll();
+                }
             }
         }
         private void chkInactived_CheckedChanged(object sender, EventArgs e)
@@ -125,11 +147,27 @@ namespace cetdabar
             {
                 chkActive.Checked = false;
                 chkActive.Enabled = false;
-                ListInactiveClass();
-            }else if(chkInactived.Checked == false)
+                if (txtSearch.Text.Length > 0)
+                {
+                    ListInactiveNameClass();
+                }
+                else
+                {
+                    ListInactiveClass();
+                }
+            }
+            else
             {
                 chkActive.Enabled = true;
-                ListAll();
+                if (txtSearch.Text.Length > 0)
+                {
+                    Variables.nameClass = txtSearch.Text;
+                    ListAllName();
+                }
+                else
+                {
+                    ListAll();
+                }
             }
         }
         private void btnAll_Click(object sender, EventArgs e)
@@ -137,7 +175,19 @@ namespace cetdabar
             txtSearch.Clear();
             chkInactived.Checked = false;
             chkActive.Checked = false;
+            cmbAndamento.SelectedIndex = -1;
+            Variables.andamentoClass = null;
             ListAll();
+        }
+
+        private void cmbAndamento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbAndamento.SelectedIndex > -1)
+            {
+                Variables.andamentoClass = cmbAndamento.Text;
+
+                ListAndamentoClass();
+            }
         }
 
         //DB Methods
@@ -159,38 +209,6 @@ namespace cetdabar
                 dgvClass.Columns[2].Width = 206;
                 dgvClass.Columns[3].Width = 206;
                 dgvClass.Columns[4].Width = 206;
-
-                string value;
-                string valueAndamento;
-                for(int i = 0; i < dgvClass.Rows.Count; i++)
-                {
-
-                    value = dgvClass.Rows[i].Cells[2].Value.ToString();
-                    valueAndamento = dgvClass.Rows[i].Cells[3].Value.ToString();
-
-                    switch (value)
-                    {
-                        case "1":
-                            dgvClass.Rows[i].Cells[2].Value = "Ativo";
-                        break;
-                        case "0":
-                            dgvClass.Rows[i].Cells[2].Value = "Inativo";
-                        break;
-                    }
-
-                    switch (valueAndamento)
-                    {
-                        case "0":
-                            dgvClass.Rows[i].Cells[3].Value = "Incompleta";
-                            break;
-                        case "1":
-                            dgvClass.Rows[i].Cells[3].Value = "Completa";
-                            break;                        
-                        case "2":
-                            dgvClass.Rows[i].Cells[3].Value = "Finalizada";
-                            break;
-                    }
-                }
                 dgvClass.ClearSelection();
                 Database.CloseConn();
             }catch (Exception ex)
@@ -247,37 +265,6 @@ namespace cetdabar
                 dgvClass.Columns[3].Width = 206;
                 dgvClass.Columns[4].Width = 206;
 
-                string value;
-                string valueAndamento;
-                for (int i = 0; i < dgvClass.Rows.Count; i++)
-                {
-
-                    value = dgvClass.Rows[i].Cells[2].Value.ToString();
-                    valueAndamento = dgvClass.Rows[i].Cells[3].Value.ToString();
-
-                    switch (value)
-                    {
-                        case "1":
-                            dgvClass.Rows[i].Cells[2].Value = "Ativo";
-                            break;
-                        case "0":
-                            dgvClass.Rows[i].Cells[2].Value = "Inativo";
-                            break;
-                    }
-
-                    switch (valueAndamento)
-                    {
-                        case "0":
-                            dgvClass.Rows[i].Cells[3].Value = "Incompleta";
-                            break;
-                        case "1":
-                            dgvClass.Rows[i].Cells[3].Value = "Completa";
-                            break;
-                        case "2":
-                            dgvClass.Rows[i].Cells[3].Value = "Finalizada";
-                            break;
-                    }
-                }
                 dgvClass.ClearSelection();
                 Database.CloseConn();
             }
@@ -307,37 +294,6 @@ namespace cetdabar
                 dgvClass.Columns[3].Width = 206;
                 dgvClass.Columns[4].Width = 206;
 
-                string value;
-                string valueAndamento;
-                for (int i = 0; i < dgvClass.Rows.Count; i++)
-                {
-
-                    value = dgvClass.Rows[i].Cells[2].Value.ToString();
-                    valueAndamento = dgvClass.Rows[i].Cells[3].Value.ToString();
-
-                    switch (value)
-                    {
-                        case "1":
-                            dgvClass.Rows[i].Cells[2].Value = "Ativo";
-                            break;
-                        case "0":
-                            dgvClass.Rows[i].Cells[2].Value = "Inativo";
-                            break;
-                    }
-
-                    switch (valueAndamento)
-                    {
-                        case "0":
-                            dgvClass.Rows[i].Cells[3].Value = "Incompleta";
-                            break;
-                        case "1":
-                            dgvClass.Rows[i].Cells[3].Value = "Completa";
-                            break;
-                        case "2":
-                            dgvClass.Rows[i].Cells[3].Value = "Finalizada";
-                            break;
-                    }
-                }
                 dgvClass.ClearSelection();
                 Database.CloseConn();
             }
@@ -366,37 +322,6 @@ namespace cetdabar
                 dgvClass.Columns[3].Width = 206;
                 dgvClass.Columns[4].Width = 206;
 
-                string value;
-                string valueAndamento;
-                for (int i = 0; i < dgvClass.Rows.Count; i++)
-                {
-
-                    value = dgvClass.Rows[i].Cells[2].Value.ToString();
-                    valueAndamento = dgvClass.Rows[i].Cells[3].Value.ToString();
-
-                    switch (value)
-                    {
-                        case "1":
-                            dgvClass.Rows[i].Cells[2].Value = "Ativo";
-                            break;
-                        case "0":
-                            dgvClass.Rows[i].Cells[2].Value = "Inativo";
-                            break;
-                    }
-
-                    switch (valueAndamento)
-                    {
-                        case "0":
-                            dgvClass.Rows[i].Cells[3].Value = "Incompleta";
-                            break;
-                        case "1":
-                            dgvClass.Rows[i].Cells[3].Value = "Completa";
-                            break;
-                        case "2":
-                            dgvClass.Rows[i].Cells[3].Value = "Finalizada";
-                            break;
-                    }
-                }
                 dgvClass.ClearSelection();
                 Database.CloseConn();
             }
@@ -426,37 +351,6 @@ namespace cetdabar
                 dgvClass.Columns[3].Width = 206;
                 dgvClass.Columns[4].Width = 206;
 
-                string value;
-                string valueAndamento;
-                for (int i = 0; i < dgvClass.Rows.Count; i++)
-                {
-
-                    value = dgvClass.Rows[i].Cells[2].Value.ToString();
-                    valueAndamento = dgvClass.Rows[i].Cells[3].Value.ToString();
-
-                    switch (value)
-                    {
-                        case "1":
-                            dgvClass.Rows[i].Cells[2].Value = "Ativo";
-                            break;
-                        case "0":
-                            dgvClass.Rows[i].Cells[2].Value = "Inativo";
-                            break;
-                    }
-
-                    switch (valueAndamento)
-                    {
-                        case "0":
-                            dgvClass.Rows[i].Cells[3].Value = "Incompleta";
-                            break;
-                        case "1":
-                            dgvClass.Rows[i].Cells[3].Value = "Completa";
-                            break;
-                        case "2":
-                            dgvClass.Rows[i].Cells[3].Value = "Finalizada";
-                            break;
-                    }
-                }
                 dgvClass.ClearSelection();
                 Database.CloseConn();
             }
@@ -486,37 +380,6 @@ namespace cetdabar
                 dgvClass.Columns[3].Width = 206;
                 dgvClass.Columns[4].Width = 206;
 
-                string value;
-                string valueAndamento;
-                for (int i = 0; i < dgvClass.Rows.Count; i++)
-                {
-
-                    value = dgvClass.Rows[i].Cells[2].Value.ToString();
-                    valueAndamento = dgvClass.Rows[i].Cells[3].Value.ToString();
-
-                    switch (value)
-                    {
-                        case "1":
-                            dgvClass.Rows[i].Cells[2].Value = "Ativo";
-                            break;
-                        case "0":
-                            dgvClass.Rows[i].Cells[2].Value = "Inativo";
-                            break;
-                    }
-
-                    switch (valueAndamento)
-                    {
-                        case "0":
-                            dgvClass.Rows[i].Cells[3].Value = "Incompleta";
-                            break;
-                        case "1":
-                            dgvClass.Rows[i].Cells[3].Value = "Completa";
-                            break;
-                        case "2":
-                            dgvClass.Rows[i].Cells[3].Value = "Finalizada";
-                            break;
-                    }
-                }
                 dgvClass.ClearSelection();
                 Database.CloseConn();
             }
@@ -525,6 +388,34 @@ namespace cetdabar
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void ListAndamentoClass()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "SELECT * FROM turmascompleto WHERE `ANDAMENTO` = @andamento COLLATE  utf8mb4_unicode_ci";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                cmd.Parameters.AddWithValue("@andamento", Variables.andamentoClass);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                dgvClass.DataSource = dt;
+                dgvClass.Columns[0].Width = 205;
+                dgvClass.Columns[1].Width = 205;
+                dgvClass.Columns[2].Width = 206;
+                dgvClass.Columns[3].Width = 206;
+                dgvClass.Columns[4].Width = 206;
+
+                dgvClass.ClearSelection();
+                Database.CloseConn();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
     }

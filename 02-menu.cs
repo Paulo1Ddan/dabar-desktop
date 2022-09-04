@@ -20,7 +20,9 @@ namespace cetdabar
 
         private void frmMenu_Load(object sender, EventArgs e)
         {
-           pnlMenu.Location = new Point(this.Width / 2 - pnlMenu.Width / 2, this.Height / 2 - pnlMenu.Height / 2);
+            pnlMenu.Location = new Point(this.Width / 2 - pnlMenu.Width / 2, this.Height / 2 - pnlMenu.Height / 2);
+            lblUser.Text = User.username;
+            timer1.Start();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -58,6 +60,17 @@ namespace cetdabar
         {
             new frmBlog().Show();
             Hide();
+        }
+
+        private void lblUser_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
         }
     }
 }
