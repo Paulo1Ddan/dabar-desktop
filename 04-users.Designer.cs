@@ -142,6 +142,8 @@
             this.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsers.Size = new System.Drawing.Size(825, 460);
             this.dgvUsers.TabIndex = 12;
+            this.dgvUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellClick);
+            this.dgvUsers.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvUsers_ColumnHeaderMouseClick);
             // 
             // btnClose
             // 
@@ -187,6 +189,7 @@
             this.btnAll.TabIndex = 16;
             this.btnAll.Text = "Todos";
             this.btnAll.UseVisualStyleBackColor = false;
+            this.btnAll.Click += new System.EventHandler(this.btnAll_Click);
             // 
             // btnDelete
             // 
@@ -202,6 +205,7 @@
             this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "Excluir";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
@@ -217,6 +221,7 @@
             this.btnUpdate.TabIndex = 14;
             this.btnUpdate.Text = "Editar";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnReg
             // 

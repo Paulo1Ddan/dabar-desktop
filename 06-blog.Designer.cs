@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pblBlog = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.chkInactive = new System.Windows.Forms.CheckBox();
@@ -37,9 +39,9 @@
             this.btnDelete = new cetdabar.CustomButton();
             this.btnUpdate = new cetdabar.CustomButton();
             this.btnReg = new cetdabar.CustomButton();
-            this.dgvBlog = new System.Windows.Forms.DataGridView();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblBlog = new System.Windows.Forms.Label();
+            this.dgvBlog = new System.Windows.Forms.DataGridView();
             this.pblBlog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBlog)).BeginInit();
             this.SuspendLayout();
@@ -47,6 +49,7 @@
             // pblBlog
             // 
             this.pblBlog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(221)))));
+            this.pblBlog.Controls.Add(this.dgvBlog);
             this.pblBlog.Controls.Add(this.label1);
             this.pblBlog.Controls.Add(this.chkInactive);
             this.pblBlog.Controls.Add(this.chkActive);
@@ -55,7 +58,6 @@
             this.pblBlog.Controls.Add(this.btnDelete);
             this.pblBlog.Controls.Add(this.btnUpdate);
             this.pblBlog.Controls.Add(this.btnReg);
-            this.pblBlog.Controls.Add(this.dgvBlog);
             this.pblBlog.Controls.Add(this.btnClose);
             this.pblBlog.Controls.Add(this.lblBlog);
             this.pblBlog.Location = new System.Drawing.Point(100, 50);
@@ -83,6 +85,7 @@
             this.chkInactive.TabIndex = 21;
             this.chkInactive.Text = "Inativo";
             this.chkInactive.UseVisualStyleBackColor = true;
+            this.chkInactive.CheckedChanged += new System.EventHandler(this.chkInactive_CheckedChanged);
             // 
             // chkActive
             // 
@@ -94,6 +97,7 @@
             this.chkActive.TabIndex = 20;
             this.chkActive.Text = "Ativo";
             this.chkActive.UseVisualStyleBackColor = true;
+            this.chkActive.CheckedChanged += new System.EventHandler(this.chkActive_CheckedChanged);
             // 
             // txtSearch
             // 
@@ -102,6 +106,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(647, 26);
             this.txtSearch.TabIndex = 19;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnAll
             // 
@@ -117,6 +122,7 @@
             this.btnAll.TabIndex = 16;
             this.btnAll.Text = "Todos";
             this.btnAll.UseVisualStyleBackColor = false;
+            this.btnAll.Click += new System.EventHandler(this.btnAll_Click);
             // 
             // btnDelete
             // 
@@ -132,6 +138,7 @@
             this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "Excluir";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
@@ -164,15 +171,6 @@
             this.btnReg.UseVisualStyleBackColor = false;
             this.btnReg.Click += new System.EventHandler(this.btnReg_Click);
             // 
-            // dgvBlog
-            // 
-            this.dgvBlog.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
-            this.dgvBlog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBlog.Location = new System.Drawing.Point(16, 118);
-            this.dgvBlog.Name = "dgvBlog";
-            this.dgvBlog.Size = new System.Drawing.Size(825, 460);
-            this.dgvBlog.TabIndex = 12;
-            // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
@@ -202,6 +200,44 @@
             this.lblBlog.TabIndex = 11;
             this.lblBlog.Text = "Blog";
             this.lblBlog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dgvBlog
+            // 
+            this.dgvBlog.AllowUserToAddRows = false;
+            this.dgvBlog.AllowUserToDeleteRows = false;
+            this.dgvBlog.AllowUserToResizeColumns = false;
+            this.dgvBlog.AllowUserToResizeRows = false;
+            this.dgvBlog.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvBlog.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBlog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            this.dgvBlog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBlog.DefaultCellStyle = dataGridViewCellStyle12;
+            this.dgvBlog.EnableHeadersVisualStyles = false;
+            this.dgvBlog.GridColor = System.Drawing.Color.Silver;
+            this.dgvBlog.Location = new System.Drawing.Point(16, 119);
+            this.dgvBlog.MultiSelect = false;
+            this.dgvBlog.Name = "dgvBlog";
+            this.dgvBlog.ReadOnly = true;
+            this.dgvBlog.RowHeadersVisible = false;
+            this.dgvBlog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBlog.Size = new System.Drawing.Size(825, 460);
+            this.dgvBlog.TabIndex = 23;
+            this.dgvBlog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBlog_CellClick);
+            this.dgvBlog.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvBlog_ColumnHeaderMouseClick);
             // 
             // frmBlog
             // 
@@ -236,8 +272,8 @@
         private CustomButton btnDelete;
         private CustomButton btnUpdate;
         private CustomButton btnReg;
-        private System.Windows.Forms.DataGridView dgvBlog;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblBlog;
+        private System.Windows.Forms.DataGridView dgvBlog;
     }
 }

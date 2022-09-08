@@ -36,6 +36,31 @@ namespace cetdabar
             Hide();
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if(Variables.selectedRow >= 0)
+            {
+                Variables.function = "EDITAR";
+                new frmRegUsers().Show();
+                Hide();
+            }
+        }
+
+        private void dgvUsers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Variables.selectedRow = int.Parse(e.RowIndex.ToString());
+            if (Variables.selectedRow >= 0)
+            {
+                Variables.idUser = Convert.ToInt32(dgvUsers[0, Variables.selectedRow].Value);
+            }
+        }
+
+        private void dgvUsers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            dgvUsers.Sort(dgvUsers.Columns[0], ListSortDirection.Ascending);
+            dgvUsers.ClearSelection();
+        }
+
         //Filter
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
@@ -139,6 +164,22 @@ namespace cetdabar
             }
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Deseja mesmo excluir esse registro?","AVISO",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if(result == DialogResult.Yes && Variables.selectedRow >= 0)
+            {
+                Delete();
+            }
+        }
+
+        private void btnAll_Click(object sender, EventArgs e)
+        {
+            txtSearch.Clear();
+            chkActive.Checked = false;
+            chkInactive.Checked = false;
+        }
+
         //DB Methods
         //ListAll
         private void ListAll()
@@ -170,7 +211,8 @@ namespace cetdabar
                 Database.StartConn();
                 string query = "DELETE FROM usuario WHERE idUsuario = @id";
                 MySqlCommand cmd = new MySqlCommand(query, Database.conn);
-                cmd.Parameters.AddWithValue("@id", Variables.idClass);
+                MessageBox.Show(Variables.idUser.ToString());
+                cmd.Parameters.AddWithValue("@id", Variables.idUser);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
@@ -306,6 +348,5 @@ namespace cetdabar
                 MessageBox.Show(ex.Message);
             } 
         }
-
     }
 }
