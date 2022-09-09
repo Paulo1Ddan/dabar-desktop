@@ -29,6 +29,11 @@ namespace cetdabar
             {
                 mskDataCad.Text = DateTime.Now.ToString("dd/MM/yyyy");
             }
+            else
+            {
+                btnPass.Visible = true;
+                LoadData();
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -57,7 +62,7 @@ namespace cetdabar
                 lblEmail.ForeColor = Color.Red;
                 MessageBox.Show("Preencha o campo Email");
                 txtEmail.Focus();
-            } else if (txtPass.Text.Length == 0)
+            } else if (txtPass.Text.Length == 0 && Variables.function != "EDITAR")
             {
                 lblPass.ForeColor= Color.Red;
                 MessageBox.Show("Preencha o campo Senha");
@@ -91,13 +96,21 @@ namespace cetdabar
                 Variables.telUser = mskTel.Text;
                 Variables.dataNascUser = DateTime.Parse(mskDateNasc.Text);
                 Variables.dataCadUser = DateTime.Parse(mskDataCad.Text);
-                if(Variables.function != "Editar")
+                if(Variables.function != "EDITAR")
                 {
-                    Insert();
+                    if (LoadEmailUser())
+                    {
+                        MessageBox.Show("Email já cadastrado");
+                        txtEmail.Focus();
+                    }
+                    else
+                    {
+                        Insert();
+                    }
                 }
                 else
                 {
-
+                    UpdateData();
                 }
             }
         }
@@ -138,6 +151,7 @@ namespace cetdabar
             lblTel.ForeColor = Color.Black;
             lblCat.ForeColor = Color.Black;
             lblStatus.ForeColor = Color.Black;
+
         }
 
         //Img
@@ -174,9 +188,9 @@ namespace cetdabar
 
                 DialogResult result = ofdImg.ShowDialog();
                 picImg.Image = Image.FromFile(ofdImg.FileName);
-                Variables.imgUser = DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ss")+".jpg";
-
-                if (result == DialogResult.Yes)
+                Variables.imgUser = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".jpg";
+                Variables.imgUser = Path.GetFileName(Variables.imgUser);
+                if (result == DialogResult.OK)
                 {
                     try
                     {
@@ -231,16 +245,13 @@ namespace cetdabar
             }
         }
 
-
-
-
         //DB Methods
         private void Insert()
         {
             try
             {
                 Database.StartConn();
-                string query = "INSERT INTO usuario (nomeUsuario, emailUsuario, telUsuario, senhaUsuario, dataNasc, imgUsuario, dataCad, statusUsuario, catUsuario, deletedUser) VALUES(@name, @email, @tel, @pass, @datanasc, @img, @datacad, @status, @cat, @del)";
+                string query = "INSERT INTO usuario (nomeUsuario, emailUsuario, telUsuario, senhaUsuario, dataNasc, imgUsuario, dataCad, statusUsuario, catUsuario, deletedUser) VALUES(@name, @email, @tel, sha1(@pass), @datanasc, @img, @datacad, @status, @cat, @del)";
                 MySqlCommand cmd = new MySqlCommand(query, Database.conn);
                 cmd.Parameters.AddWithValue("@name", Variables.nameUser);
                 cmd.Parameters.AddWithValue("@email", Variables.emailUser);
@@ -253,21 +264,18 @@ namespace cetdabar
                 cmd.Parameters.AddWithValue("@cat", Variables.catUser);
                 cmd.Parameters.AddWithValue("@del", 0);
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Turma cadastrada com sucesso");
+                MessageBox.Show("Usuario cadastrado com sucesso");
 
                 if (ValidateFTP())
                 {
                     if (!string.IsNullOrEmpty(Variables.imgUser))
                     {
                         string urlEnviarArquivo = Variables.addrFTP + "assets/usuario/" + Path.GetFileName(Variables.imgUser);
-                        MessageBox.Show(Variables.pathImgUser);
-                        MessageBox.Show(urlEnviarArquivo);
-                        
                         try
                         {
-                            
                             FTP.SendFile(Variables.pathImgUser, urlEnviarArquivo, Variables.userFTP, Variables.passFTP);
-
+                            new frmUsers().Show();
+                            Close();
                         }catch(Exception ex)
                         {
                             MessageBox.Show(ex.Message);
@@ -280,8 +288,149 @@ namespace cetdabar
             {
                 MessageBox.Show("Erro ao inserir dados! \n\n Descrição: " + ex.Message);
             }
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "SELECT * FROM usuario WHERE idUsuario = @id";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                cmd.Parameters.AddWithValue("@id", Variables.idUser);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Variables.nameUser = reader.GetString(1);
+                    Variables.emailUser = reader.GetString(2);
+                    Variables.telUser = reader.GetString(3);
+                    Variables.dataNascUser = reader.GetDateTime(5);
+                    Variables.imgUser = reader.GetString(6);
+                    Variables.dataCadUser = reader.GetDateTime(7);
+                    Variables.statusUser = reader.GetInt32(8);
+                    Variables.catUser = reader.GetInt32(9);
+
+                    txtCod.Text = Variables.idUser.ToString();
+                    txtName.Text = Variables.nameUser;
+                    txtEmail.Text = Variables.emailUser;
+                    mskTel.Text = Variables.telUser;
+                    mskDateNasc.Text = Variables.dataNascUser.ToString("dd/MM/yyyy");
+                    mskDataCad.Text = Variables.dataCadUser.ToString("dd/MM/yyyy");
+
+                    switch (Variables.catUser)
+                    {
+                        case 0:
+                            cmbCat.Text = "Aluno";
+                            break;
+                        case 1:
+                            cmbCat.Text = "Professor";
+                            break;
+                        case 2:
+                            cmbCat.Text = "Administrador";
+                            break;
+                    }
+
+                    if (Variables.statusUser == 1)
+                    {
+                        cmbStatus.Text = "Ativo";
+                    }
+                    else
+                    {
+                        cmbStatus.Text = "Inativo";
+                    }
+
+                    picImg.Image = BytesToImage(GetImgToByte(Variables.addrFTP + "assets/usuario/" + Variables.imgUser));
+
+                }
+                Database.CloseConn();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private bool LoadEmailUser()
+        {
+
+                Database.StartConn();
+                string query = "SELECT emailUsuario FROM usuario WHERE emailUsuario = @email";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                cmd.Parameters.AddWithValue("@email", Variables.emailUser);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Database.CloseConn();
+                    return true;
+                }
+                else
+                {
+                    Database.CloseConn();
+                    return false;
+                }
+        }
+
+        private void UpdateData()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "UPDATE usuario SET nomeUsuario = @nome, emailUsuario = @email, telUsuario = @tel, dataNasc = @datanasc, statusUsuario = @status, catUsuario = @cat WHERE idUsuario = @id";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                cmd.Parameters.AddWithValue("@nome", Variables.nameUser);
+                cmd.Parameters.AddWithValue("@email", Variables.emailUser);
+                cmd.Parameters.AddWithValue("@tel", Variables.telUser);
+                cmd.Parameters.AddWithValue("@datanasc", Variables.dataNascUser.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@status", Variables.statusUser);
+                cmd.Parameters.AddWithValue("@cat", Variables.catUser);
+                cmd.Parameters.AddWithValue("@id", Variables.idUser);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Usuario Atualizado com sucesso");
+                Database.CloseConn();
+                
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void UpdatePass()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "UPDATE usuario SET senhaUsuario = sha1(@senha) WHERE idUsuario = @id";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                cmd.Parameters.AddWithValue("@senha", Variables.passUser);
+                cmd.Parameters.AddWithValue("@id", Variables.idUser);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Senha Atualizada com sucesso");
+                Database.CloseConn();
 
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnPass_Click(object sender, EventArgs e)
+        {
+            lblPass.ForeColor = Color.Black;
+            if (txtPass.Text.Length == 0)
+            {
+                lblPass.ForeColor = Color.Red;
+                MessageBox.Show("Preencha o campo Senha");
+                txtPass.Focus();
+            }
+            else
+            {
+                Variables.passUser = txtPass.Text;
+                UpdatePass();
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ namespace cetdabar
                     int bytes = 0;
                     using(Stream stream = request.GetRequestStream())
                     {
-                        while(bytesSent < buffer.Length)
+                        while(bytesSent < fileinfo.Length)
                         {
                             bytes = fs.Read(buffer, 0, buffer.Length);
                             stream.Write(buffer, 0, bytes);

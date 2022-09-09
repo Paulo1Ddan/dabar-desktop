@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRegUsers));
             this.pnlUsers = new System.Windows.Forms.Panel();
+            this.mskDataCad = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.mskDateNasc = new System.Windows.Forms.MaskedTextBox();
             this.btnClear = new cetdabar.CustomButton();
             this.btnReg = new cetdabar.CustomButton();
             this.btnAddImg = new System.Windows.Forms.Button();
@@ -52,9 +55,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblClass = new System.Windows.Forms.Label();
-            this.mskDateNasc = new System.Windows.Forms.MaskedTextBox();
-            this.mskDataCad = new System.Windows.Forms.MaskedTextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnPass = new cetdabar.CustomButton();
             this.pnlUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImg)).BeginInit();
             this.SuspendLayout();
@@ -62,6 +63,7 @@
             // pnlUsers
             // 
             this.pnlUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(221)))));
+            this.pnlUsers.Controls.Add(this.btnPass);
             this.pnlUsers.Controls.Add(this.mskDataCad);
             this.pnlUsers.Controls.Add(this.label1);
             this.pnlUsers.Controls.Add(this.mskDateNasc);
@@ -91,6 +93,37 @@
             this.pnlUsers.Name = "pnlUsers";
             this.pnlUsers.Size = new System.Drawing.Size(1100, 600);
             this.pnlUsers.TabIndex = 3;
+            // 
+            // mskDataCad
+            // 
+            this.mskDataCad.Enabled = false;
+            this.mskDataCad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mskDataCad.Location = new System.Drawing.Point(818, 395);
+            this.mskDataCad.Mask = "00/00/0000";
+            this.mskDataCad.Name = "mskDataCad";
+            this.mskDataCad.Size = new System.Drawing.Size(247, 26);
+            this.mskDataCad.TabIndex = 46;
+            this.mskDataCad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(821, 372);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(151, 20);
+            this.label1.TabIndex = 45;
+            this.label1.Text = "Data de Cadastro";
+            // 
+            // mskDateNasc
+            // 
+            this.mskDateNasc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mskDateNasc.Location = new System.Drawing.Point(22, 259);
+            this.mskDateNasc.Mask = "00/00/0000";
+            this.mskDateNasc.Name = "mskDateNasc";
+            this.mskDateNasc.Size = new System.Drawing.Size(300, 26);
+            this.mskDateNasc.TabIndex = 44;
+            this.mskDateNasc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnClear
             // 
@@ -164,7 +197,7 @@
             // 
             this.lblDataBorn.AutoSize = true;
             this.lblDataBorn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataBorn.Location = new System.Drawing.Point(25, 310);
+            this.lblDataBorn.Location = new System.Drawing.Point(25, 236);
             this.lblDataBorn.Name = "lblDataBorn";
             this.lblDataBorn.Size = new System.Drawing.Size(172, 20);
             this.lblDataBorn.TabIndex = 41;
@@ -242,7 +275,7 @@
             // 
             this.lblPass.AutoSize = true;
             this.lblPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPass.Location = new System.Drawing.Point(25, 234);
+            this.lblPass.Location = new System.Drawing.Point(25, 340);
             this.lblPass.Name = "lblPass";
             this.lblPass.Size = new System.Drawing.Size(61, 20);
             this.lblPass.TabIndex = 32;
@@ -251,7 +284,7 @@
             // txtPass
             // 
             this.txtPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPass.Location = new System.Drawing.Point(22, 257);
+            this.txtPass.Location = new System.Drawing.Point(22, 363);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(315, 26);
             this.txtPass.TabIndex = 3;
@@ -344,36 +377,22 @@
             this.lblClass.Text = "Cadastrar Usuário";
             this.lblClass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mskDateNasc
+            // btnPass
             // 
-            this.mskDateNasc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mskDateNasc.Location = new System.Drawing.Point(22, 333);
-            this.mskDateNasc.Mask = "00/00/0000";
-            this.mskDateNasc.Name = "mskDateNasc";
-            this.mskDateNasc.Size = new System.Drawing.Size(207, 26);
-            this.mskDateNasc.TabIndex = 44;
-            this.mskDateNasc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // mskDataCad
-            // 
-            this.mskDataCad.Enabled = false;
-            this.mskDataCad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mskDataCad.Location = new System.Drawing.Point(818, 395);
-            this.mskDataCad.Mask = "00/00/0000";
-            this.mskDataCad.Name = "mskDataCad";
-            this.mskDataCad.Size = new System.Drawing.Size(247, 26);
-            this.mskDataCad.TabIndex = 46;
-            this.mskDataCad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(821, 372);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(151, 20);
-            this.label1.TabIndex = 45;
-            this.label1.Text = "Data de Cadastro";
+            this.btnPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(54)))), ((int)(((byte)(20)))));
+            this.btnPass.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPass.FlatAppearance.BorderSize = 0;
+            this.btnPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPass.ForeColor = System.Drawing.Color.White;
+            this.btnPass.Location = new System.Drawing.Point(22, 395);
+            this.btnPass.Name = "btnPass";
+            this.btnPass.Size = new System.Drawing.Size(150, 40);
+            this.btnPass.TabIndex = 47;
+            this.btnPass.Text = "Alterar Senha";
+            this.btnPass.UseVisualStyleBackColor = false;
+            this.btnPass.Visible = false;
+            this.btnPass.Click += new System.EventHandler(this.btnPass_Click);
             // 
             // frmRegUsers
             // 
@@ -426,5 +445,6 @@
         private System.Windows.Forms.MaskedTextBox mskDateNasc;
         private System.Windows.Forms.MaskedTextBox mskDataCad;
         private System.Windows.Forms.Label label1;
+        private CustomButton btnPass;
     }
 }
