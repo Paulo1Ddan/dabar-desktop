@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="cetdabar.exe" size="1279976">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="cetdabar.exe" size="1282536">
       <assemblyIdentity name="cetdabar" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>wMYZUPSql1ySxPz5z42NYOvyFqiKsGJa8dgnbaFUP28=</dsig:DigestValue>
+        <dsig:DigestValue>Gn4QKw9lmDaas+r7XJOlxe6EP+Igd8J3+ek7fQg9V+Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

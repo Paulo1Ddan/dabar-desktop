@@ -53,7 +53,7 @@ namespace cetdabar
                 MySqlCommand cmd = new MySqlCommand(query, Database.conn);
                 cmd.Parameters.AddWithValue("@email", txtLogin.Text);
                 cmd.Parameters.AddWithValue("@senha", txtPassword.Text);
-                cmd.Parameters.AddWithValue("@cat", 1);
+                cmd.Parameters.AddWithValue("@cat", 2);
                 cmd.Parameters.AddWithValue("@status", 1);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())

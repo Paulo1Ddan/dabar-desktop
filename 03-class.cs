@@ -224,7 +224,7 @@ namespace cetdabar
             try
             {
                 Database.StartConn();
-                string query = "DELETE FROM turma WHERE idTurma = @id";
+                string query = "UPDATE turma SET deletedTurma = 1 WHERE idTurma = @id";
                 MySqlCommand cmd = new MySqlCommand(query, Database.conn);
                 cmd.Parameters.AddWithValue("@id", Variables.idClass);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);

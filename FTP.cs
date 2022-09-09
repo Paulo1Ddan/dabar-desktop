@@ -40,7 +40,7 @@ namespace cetdabar
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Erro ao enviar arquivo \n\n Descrição - ", ex.Message);
+                MessageBox.Show("Erro ao enviar arquivo \n\n Descrição - "+ ex.Message);
             }
         }
     }

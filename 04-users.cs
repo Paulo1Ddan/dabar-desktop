@@ -209,7 +209,7 @@ namespace cetdabar
             try
             {
                 Database.StartConn();
-                string query = "DELETE FROM usuario WHERE idUsuario = @id";
+                string query = "UPDATE usuario SET deletedUser = 1 WHERE idUsuario = @id";
                 MySqlCommand cmd = new MySqlCommand(query, Database.conn);
                 MessageBox.Show(Variables.idUser.ToString());
                 cmd.Parameters.AddWithValue("@id", Variables.idUser);

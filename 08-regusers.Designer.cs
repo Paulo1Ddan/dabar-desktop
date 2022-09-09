@@ -36,7 +36,6 @@
             this.picImg = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lblDataBorn = new System.Windows.Forms.Label();
-            this.mthBirthday = new System.Windows.Forms.MonthCalendar();
             this.lblCat = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.cmbCat = new System.Windows.Forms.ComboBox();
@@ -53,6 +52,9 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblClass = new System.Windows.Forms.Label();
+            this.mskDateNasc = new System.Windows.Forms.MaskedTextBox();
+            this.mskDataCad = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImg)).BeginInit();
             this.SuspendLayout();
@@ -60,13 +62,15 @@
             // pnlUsers
             // 
             this.pnlUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(221)))));
+            this.pnlUsers.Controls.Add(this.mskDataCad);
+            this.pnlUsers.Controls.Add(this.label1);
+            this.pnlUsers.Controls.Add(this.mskDateNasc);
             this.pnlUsers.Controls.Add(this.btnClear);
             this.pnlUsers.Controls.Add(this.btnReg);
             this.pnlUsers.Controls.Add(this.btnAddImg);
             this.pnlUsers.Controls.Add(this.picImg);
             this.pnlUsers.Controls.Add(this.label3);
             this.pnlUsers.Controls.Add(this.lblDataBorn);
-            this.pnlUsers.Controls.Add(this.mthBirthday);
             this.pnlUsers.Controls.Add(this.lblCat);
             this.pnlUsers.Controls.Add(this.lblStatus);
             this.pnlUsers.Controls.Add(this.cmbCat);
@@ -127,7 +131,7 @@
             this.btnAddImg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddImg.ForeColor = System.Drawing.Color.White;
-            this.btnAddImg.Location = new System.Drawing.Point(708, 454);
+            this.btnAddImg.Location = new System.Drawing.Point(715, 455);
             this.btnAddImg.Name = "btnAddImg";
             this.btnAddImg.Size = new System.Drawing.Size(40, 40);
             this.btnAddImg.TabIndex = 8;
@@ -138,12 +142,13 @@
             // picImg
             // 
             this.picImg.Image = ((System.Drawing.Image)(resources.GetObject("picImg.Image")));
-            this.picImg.Location = new System.Drawing.Point(521, 333);
+            this.picImg.Location = new System.Drawing.Point(528, 333);
             this.picImg.Name = "picImg";
             this.picImg.Size = new System.Drawing.Size(227, 162);
             this.picImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picImg.TabIndex = 43;
             this.picImg.TabStop = false;
+            this.picImg.Click += new System.EventHandler(this.picImg_Click);
             // 
             // label3
             // 
@@ -165,12 +170,6 @@
             this.lblDataBorn.TabIndex = 41;
             this.lblDataBorn.Text = "Data de Nascimento";
             // 
-            // mthBirthday
-            // 
-            this.mthBirthday.Location = new System.Drawing.Point(22, 332);
-            this.mthBirthday.Name = "mthBirthday";
-            this.mthBirthday.TabIndex = 7;
-            // 
             // lblCat
             // 
             this.lblCat.AutoSize = true;
@@ -185,7 +184,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(821, 310);
+            this.lblStatus.Location = new System.Drawing.Point(821, 303);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(62, 20);
             this.lblStatus.TabIndex = 38;
@@ -204,6 +203,7 @@
             this.cmbCat.Name = "cmbCat";
             this.cmbCat.Size = new System.Drawing.Size(247, 28);
             this.cmbCat.TabIndex = 5;
+            this.cmbCat.SelectedIndexChanged += new System.EventHandler(this.cmbCat_SelectedIndexChanged);
             // 
             // cmbStatus
             // 
@@ -213,10 +213,11 @@
             this.cmbStatus.Items.AddRange(new object[] {
             "Ativo",
             "Inativo"});
-            this.cmbStatus.Location = new System.Drawing.Point(818, 333);
+            this.cmbStatus.Location = new System.Drawing.Point(818, 326);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(249, 28);
             this.cmbStatus.TabIndex = 6;
+            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
             // 
             // mskTel
             // 
@@ -343,6 +344,37 @@
             this.lblClass.Text = "Cadastrar Usuário";
             this.lblClass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // mskDateNasc
+            // 
+            this.mskDateNasc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mskDateNasc.Location = new System.Drawing.Point(22, 333);
+            this.mskDateNasc.Mask = "00/00/0000";
+            this.mskDateNasc.Name = "mskDateNasc";
+            this.mskDateNasc.Size = new System.Drawing.Size(207, 26);
+            this.mskDateNasc.TabIndex = 44;
+            this.mskDateNasc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // mskDataCad
+            // 
+            this.mskDataCad.Enabled = false;
+            this.mskDataCad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mskDataCad.Location = new System.Drawing.Point(818, 395);
+            this.mskDataCad.Mask = "00/00/0000";
+            this.mskDataCad.Name = "mskDataCad";
+            this.mskDataCad.Size = new System.Drawing.Size(247, 26);
+            this.mskDataCad.TabIndex = 46;
+            this.mskDataCad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(821, 372);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(151, 20);
+            this.label1.TabIndex = 45;
+            this.label1.Text = "Data de Cadastro";
+            // 
             // frmRegUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -387,10 +419,12 @@
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblDataBorn;
-        private System.Windows.Forms.MonthCalendar mthBirthday;
         private System.Windows.Forms.PictureBox picImg;
         private System.Windows.Forms.Button btnAddImg;
         private CustomButton btnClear;
         private CustomButton btnReg;
+        private System.Windows.Forms.MaskedTextBox mskDateNasc;
+        private System.Windows.Forms.MaskedTextBox mskDataCad;
+        private System.Windows.Forms.Label label1;
     }
 }
