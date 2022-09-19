@@ -190,3 +190,5 @@ C:\Users\Paulo Daniel\source\repos\Paulo1Ddan\dabar-desktop\obj\Debug\cetdabar.a
 C:\Users\Paulo Daniel\source\repos\Paulo1Ddan\dabar-desktop\obj\Debug\cetdabar.csproj.CopyComplete
 C:\Users\Paulo Daniel\source\repos\Paulo1Ddan\dabar-desktop\obj\Debug\cetdabar.exe
 C:\Users\Paulo Daniel\source\repos\Paulo1Ddan\dabar-desktop\obj\Debug\cetdabar.pdb
+C:\Users\Paulo Daniel\source\repos\Paulo1Ddan\dabar-desktop\obj\Debug\cetdabar.frmAprovarEspera.resources
+C:\Users\Paulo Daniel\source\repos\Paulo1Ddan\dabar-desktop\obj\Debug\cetdabar.frmCadMatricula.resources

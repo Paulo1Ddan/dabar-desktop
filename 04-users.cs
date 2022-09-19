@@ -22,6 +22,7 @@ namespace cetdabar
         {
             pnlUsers.Location = new Point(this.Width/2 - pnlUsers.Width/2, this.Height/2 - pnlUsers.Height/2);
             ListAll();
+            
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -348,6 +349,11 @@ namespace cetdabar
             {
                 MessageBox.Show(ex.Message);
             } 
+        }
+
+        private void dgvUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

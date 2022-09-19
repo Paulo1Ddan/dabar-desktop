@@ -180,11 +180,24 @@
     <Compile Include="10-regblog.Designer.cs">
       <DependentUpon>10-regblog.cs</DependentUpon>
     </Compile>
+    <Compile Include="11-frmMatriculaEspera.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="11-frmMatriculaEspera.Designer.cs">
+      <DependentUpon>11-frmMatriculaEspera.cs</DependentUpon>
+    </Compile>
+    <Compile Include="12-frmCadMatricula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="12-frmCadMatricula.Designer.cs">
+      <DependentUpon>12-frmCadMatricula.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Database.cs" />
     <Compile Include="FTP.cs" />
+    <Compile Include="MySlqCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
@@ -218,6 +231,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="10-regblog.resx">
       <DependentUpon>10-regblog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="11-frmMatriculaEspera.resx">
+      <DependentUpon>11-frmMatriculaEspera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="12-frmCadMatricula.resx">
+      <DependentUpon>12-frmCadMatricula.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

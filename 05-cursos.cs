@@ -32,13 +32,25 @@ namespace cetdabar
 
         private void btnReg_Click(object sender, EventArgs e)
         {
+            Variables.function = "CADASTRAR";
+            new frmRegCursos().Show();
+            Hide();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            Variables.function = "EDITAR";
             new frmRegCursos().Show();
             Hide();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            
+            var result = MessageBox.Show("Deseja mesmo excluir esse registro?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes && Variables.selectedRow >= 0)
+            {
+                Delete();
+            }
         }
         //DB Methods
         //LoadData
@@ -66,5 +78,47 @@ namespace cetdabar
 
         }
 
+        private void Delete()
+        {
+            try
+            {
+                Database.StartConn();
+                string query = "UPDATE curso SET deletedCurso = 1 WHERE idCurso = @id";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                MessageBox.Show(Variables.idCurso.ToString());
+                cmd.Parameters.AddWithValue("@id", Variables.idCurso);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                MessageBox.Show("Curso excluido com sucesso");
+
+                dgvCursos.DataSource = dt;
+                dgvCursos.ClearSelection();
+
+                Database.CloseConn();
+                ListAll();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao deletar turma \n\n Descrição - " + ex.Message);
+            }
+        }
+
+        private void dgvCursos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Variables.selectedRow = int.Parse(e.RowIndex.ToString());
+            if (Variables.selectedRow >= 0)
+            {
+                Variables.idCurso = Convert.ToInt32(dgvCursos[0, Variables.selectedRow].Value);
+            }
+        }
+
+        private void dgvCursos_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            dgvCursos.Sort(dgvCursos.Columns[0], ListSortDirection.Ascending);
+            dgvCursos.ClearSelection();
+        }
     }
 }

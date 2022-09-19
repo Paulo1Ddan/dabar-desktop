@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Math.EC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -111,6 +112,10 @@ namespace cetdabar
                 else
                 {
                     UpdateData();
+                    if(Variables.imgUpdateUser == "S")
+                    {
+                        UpdateImg();
+                    }
                 }
             }
         }
@@ -394,6 +399,43 @@ namespace cetdabar
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void UpdateImg()
+        {
+            try
+            {
+
+                Database.StartConn();
+                string query = "UPDATE usuario SET imgUsuario = @img WHERE idUsuario = @id";
+                MySqlCommand cmd = new MySqlCommand(query, Database.conn);
+                cmd.Parameters.AddWithValue("@img", Variables.imgUser);
+                cmd.Parameters.AddWithValue("@id", Variables.idUser);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Imagem Atualizada com sucesso");
+                if (ValidateFTP())
+                {
+                    if (!string.IsNullOrEmpty(Variables.imgUser))
+                    {
+                        string urlEnviarArquivo = Variables.addrFTP + "assets/usuario/" + Path.GetFileName(Variables.imgUser);
+                        try
+                        {
+                            FTP.SendFile(Variables.pathImgUser, urlEnviarArquivo, Variables.userFTP, Variables.passFTP);
+                            new frmUsers().Show();
+                            Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Database.CloseConn();
+
         }
 
         private void UpdatePass()

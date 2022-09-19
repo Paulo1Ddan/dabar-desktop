@@ -42,6 +42,7 @@ namespace cetdabar
 
         private void btnReg_Click(object sender, EventArgs e)
         {
+            Variables.function = "CADASTRAR";
             new frmRegClass().Show();
             Hide();
         }

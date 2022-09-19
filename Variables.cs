@@ -27,6 +27,13 @@ namespace cetdabar
         public static string titleBlog, artigo, imgCapa, imgBanner, upImgapa, upImgBanner, pathImgCapa, pathImgBanner;
         public static DateTime dataCadBlog;
 
+        //Matricula
+        public static int idMatricula, statusMatricula;
+        
+        //Curso
+        public static int idCurso, statusCurso;
+        public static string nomeCurso, duracaoCurso, instrutorCurso, msgWppCurso, descCurso, imgCurso, pathImgCurso, imgUpdateCurso;
+
         //FTP
         public static string addrFTP = "ftp://127.0.0.1/admin/";
         public static string userFTP = "cetdabar";
