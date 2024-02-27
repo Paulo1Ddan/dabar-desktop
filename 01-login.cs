@@ -21,8 +21,8 @@ namespace cetdabar
         private void frmLogin_Load(object sender, EventArgs e)
         {
             pnlLogin.Location = new Point(this.Width /2 - pnlLogin.Width /2, this.Height /2 - pnlLogin.Height /2);
-            txtLogin.Text = "paulodaniel1360@gmail.com";
-            txtPassword.Text = "Paulo1Ddan";
+            txtLogin.Text = "";
+            txtPassword.Text = "";
         }
 
         private void btnClose_Click(object sender, EventArgs e)
